@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DigitalEyez - AI Vision Assistant</title>
+</head>
+<body>
+    <h2>Upload an Image</h2>
+    <form action="/" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Upload">
+    </form>
+
+    {% if text %}
+        <h3>Extracted Text:</h3>
+        <p>{{ text }}</p>
+    {% endif %}
+
+    {% if image_path %}
+        <h3>Processed Image:</h3>
+        <img src="{{ image_path }}" width="400">
+    {% endif %}
+</body>
+</html>
