@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "lucide-react": "^0.475.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-speakup": "^1.1.2"
+  }
+}
