@@ -12,7 +12,7 @@ CORS(app)
 
 @app.route('/')
 def home():
-    return jsonify({"message": "Flask backend connected!"})
+    return jsonify({"message": "Digital Eyez leverages AI-powered vision and voice to make accessibility smarter and more inclusive."})
 
 @app.route('/process_image', methods=['POST'])
 def process_image():

@@ -2,16 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer
-      className="footer"
-      style={{
-        padding: "1rem",
-        background: "var(--bg-dark)",
-        color: "#fff",
-        textAlign: "center",
-        fontSize: "0.9em",
-      }}
-    >
+    <footer className="footer">
       &copy; {new Date().getFullYear()} Digital Eyez. All rights reserved.
     </footer>
   );

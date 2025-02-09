@@ -10,6 +10,8 @@ const Header = () => {
         color: "#fff",
         textAlign: "center",
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        borderRadius: "16px",
+        margin: "1rem",
       }}
     >
       <h1 style={{ margin: 0 }}>Digital Eyez</h1>

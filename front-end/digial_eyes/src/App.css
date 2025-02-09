@@ -12,7 +12,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* This class should wrap the main content (the Routes area) so it takes up available space */
+/* Main content area that expands */
 .main-content {
   flex: 1;
   padding: 1rem;
@@ -27,46 +27,17 @@
   font-size: 0.9em;
 }
 
-/* Card component for sections if needed */
+/* Card component styling */
 .card {
-  padding: 2em;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 1rem;
+  margin: 2rem auto;
+  max-width: 600px;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Logo styling (if used) */
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #ff6f61);
-}
-
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #6a5acd);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
+/* Additional utility classes if needed */
 .read-the-docs {
   color: #888;
   font-style: italic;

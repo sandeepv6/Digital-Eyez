@@ -14,17 +14,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div
-      className="card"
-      style={{
-        margin: "2rem auto",
-        maxWidth: "600px",
-        padding: "2rem",
-        background: "#fff",
-        borderRadius: "8px",
-        boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-      }}
-    >
+    <div className="card">
       <h2 style={{ fontSize: "2rem", color: "var(--text-color)", margin: 0 }}>
         Welcome to Digital Eyez
       </h2>

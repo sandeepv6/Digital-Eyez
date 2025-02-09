@@ -9,7 +9,11 @@ function App() {
     <Router>
       <div
         className="app-container"
-        style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          minHeight: "100vh",
+        }}
       >
         <Header />
         <div className="main-content" style={{ flex: 1 }}>

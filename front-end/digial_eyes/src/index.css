@@ -1,7 +1,7 @@
 :root {
   /* Color Variables */
   --primary-color: #3498db;
-  --primary-hover: #2d85c7; /* slightly darker version of primary */
+  --primary-hover: #2d85c7;
   --secondary-color: #f6d365;
   --tertiary-color: #fda085;
   --bg-light: #ecf0f1;
@@ -10,8 +10,8 @@
   --text-color: #2c3e50;
   --shadow-color: rgba(0, 0, 0, 0.6);
 
-  /* Typography */
-  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* Updated Font Family using Poppins */
+  font-family: 'Poppins', 'Helvetica Neue', sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
@@ -23,6 +23,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* General body styles */
 body {
   margin: 0;
   padding: 0;
@@ -30,13 +31,6 @@ body {
   flex-direction: column;
   min-height: 100vh;
   background: var(--bg-light);
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-  color: var(--text-color);
-  margin: 0;
 }
 
 /* Link Styling with Gradient Text and Text Shadow for Readability */
@@ -51,11 +45,10 @@ a {
 }
 
 a:hover {
-  color: var(--primary-color);
   text-decoration: underline;
 }
 
-/* Professional Button Styling */
+/* Button Styling */
 button {
   border-radius: 8px;
   border: none;
@@ -76,19 +69,4 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto #9b59b6;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: var(--text-color);
-    background-color: var(--bg-light);
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
-  
-  button {
-    background-color: var(--primary-color);
-  }
 }
