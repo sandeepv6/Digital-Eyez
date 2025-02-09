@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Webcam from "react-webcam";
+import { speakText } from "./TextToSpeech";
 
 const BACKEND_URL = "http://127.0.0.1:5000"; // Ensure your Flask backend is running here
 
@@ -30,6 +31,9 @@ function CameraScreen() {
         });
 
         const data = await response.json();
+
+        speakText(data.AI_Response)
+
         setPrediction(data.result);
     } catch (error) {
         console.error("Error sending image:", error);
