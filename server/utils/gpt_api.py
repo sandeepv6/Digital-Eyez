@@ -65,5 +65,3 @@ def call_gpt_safety(image_path):
 
     print(response.choices[0].message.content)
     return response.choices[0].message.content
-
-call_gpt_safety("class.jpg")
