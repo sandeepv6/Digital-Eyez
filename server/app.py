@@ -34,6 +34,16 @@ def process_image():
         return jsonify({"result": result})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+@app.route('/submit_prompt', methods=['POST'])
+def process_prompt():
+    data = request.get_json()
+    prompt_text = data.get('prompt_text', '')
+    response_message = f"Recieved: {prompt_text}"
+
+    print(response_message)
+
+    return jsonify({"message": "Recieved prompt"})
 
 if __name__ == '__main__':
     app.run(debug=True)
