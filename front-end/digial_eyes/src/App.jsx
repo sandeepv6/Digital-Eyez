@@ -22,7 +22,6 @@ function App() {
             <Route path="/camera" element={<CameraScreen />} />
           </Routes>
         </div>
-        <Footer />
       </div>
     </Router>
   );
