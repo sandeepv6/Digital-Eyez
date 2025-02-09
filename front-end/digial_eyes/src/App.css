@@ -1,21 +1,55 @@
+/* Main container for your app. The flex layout ensures the footer sticks at the bottom. */
 #root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  background: var(--gradient-bg);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* This class should wrap the main content (the Routes area) so it takes up available space */
+.main-content {
+  flex: 1;
+  padding: 1rem;
+}
+
+/* Footer Styling */
+.footer {
+  padding: 1rem;
+  background: var(--bg-dark);
+  color: #fff;
+  text-align: center;
+  font-size: 0.9em;
+}
+
+/* Card component for sections if needed */
+.card {
+  padding: 2em;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+}
+
+/* Logo styling (if used) */
 .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em #ff6f61);
 }
+
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em #6a5acd);
 }
 
 @keyframes logo-spin {
@@ -33,10 +67,7 @@
   }
 }
 
-.card {
-  padding: 2em;
-}
-
 .read-the-docs {
   color: #888;
+  font-style: italic;
 }

@@ -1,6 +1,7 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import Webcam from "react-webcam";
+import VoiceToText from "./VoiceToText";
 
 const BACKEND_URL = "http://127.0.0.1:5000"; // Ensure your Flask backend is running here
 
@@ -36,6 +37,7 @@ function CameraScreen() {
         setPrediction("Error processing image");
     }
     };
+
 
     return (
     <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-br from-gray-900 to-gray-700">

@@ -31,6 +31,10 @@ const VoiceToText = () => {
     recognition.onresult = (event) => {
       const text = event.results[event.results.length - 1][0].transcript;
       setTranscript((prevTranscript) => prevTranscript + " " + text); // Append new speech
+
+      if (text.toLowerCase().includes("take a photo") && onCommand) {
+        onCommand();
+      }
     };
 
     recognition.onerror = (event) => {
@@ -78,8 +82,8 @@ const VoiceToText = () => {
             console.error('Error submitting prompt:', error);
         }
         }
-
   }
+
 
   return (
     <div className="flex flex-col items-center gap-4 p-4">
