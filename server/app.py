@@ -59,7 +59,8 @@ def process_prompt():
 
 def query_llm(queries):
     image_path = "received_image.jpg"
-    if user_prompt == "":
+  
+    if queries == "":
        return safety_prompt(image_path)
     user_prompt_text = queries
     output = user_prompt(image_path, user_prompt_text)
