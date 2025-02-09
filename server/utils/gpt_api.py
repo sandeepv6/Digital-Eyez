@@ -39,10 +39,12 @@ def call_gpt_safety(image_path):
     image_base64 = encode_image(image_path)
 
     safety_prompt = """
-    You are an AI vision assistant analyzing this image for potential hazards or warnings related to driving
-    and road safety. Identify any stop signs, traffic lights, pedestrians, cyclists, approaching vehicles, or
-    environmental risks that could indicate a need for caution. If a hazard or warning is present, describe it
-    concisely. If no hazards or warnings are detected, return only the text: 'No Hazard'.
+        You are an AI vision assistant analyzing this image for any potential hazards, warnings, or risks of any kind. Identify and describe 
+        any elements that could pose a direct or indirect danger, threat, or concern across all possible domains. Include anything that blind people might need to know.
+        These elements can include any sort of upcoming signs (i.e. stop sign, traffic signals, warning signs, hazard signs)
+        If any risk is detected, describe it concisely with its potential impact on safety. If no hazards or warnings are present, return only the text: 'No Hazard'
+        Example: Stairs might indicate a possibility of dropping so the response should inform the user that there are stairs upcoming in their pathway.
+        Try to keep responses as short as possible but still provide all crucial details.
     """
 
     # Define messages correctly
@@ -57,9 +59,11 @@ def call_gpt_safety(image_path):
     response = client.chat.completions.create(
         model="gpt-4-turbo",
         messages=messages,
-        max_tokens=300,
+        max_tokens=200,
         temperature=0.7
     )
 
     print(response.choices[0].message.content)
     return response.choices[0].message.content
+
+call_gpt_safety("class.jpg")
