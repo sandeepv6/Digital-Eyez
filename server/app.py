@@ -1,8 +1,11 @@
+import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import base64
 from io import BytesIO
 from PIL import Image
+from utils.gpt_api import call_gpt as user_prompt
+from utils.gpt_api import call_gpt_safety as safety_prompt
 
 app = Flask(__name__)
 CORS(app)
@@ -27,8 +30,16 @@ def process_image():
 
         # Perform image processing (Example: Save or analyze)
         image.save("received_image.jpg")  # Optional: Save image for debugging
+        
+        # After calling image.save("received_image.jpg")
+        file_path = "received_image.jpg"
 
-        # Placeholder AI response
+        # Check if the file exists
+        if os.path.exists(file_path):
+            query_llm("")
+        else:
+            print("Image file was not saved.")
+        
         result = "Image processed successfully!"
 
         return jsonify({"result": result})
@@ -40,10 +51,24 @@ def process_prompt():
     data = request.get_json()
     prompt_text = data.get('prompt_text', '')
     response_message = f"Recieved: {prompt_text}"
+    
+    file_path = "received_image.jpg"
 
+    query_llm(response_message)
+    
     print(response_message)
 
     return jsonify({"message": "Recieved prompt"})
+
+
+def query_llm(queries):
+    image_path = "received_image.jpg"
+    if user_prompt == "":
+       return safety_prompt(image_path)
+    user_prompt_text = queries
+    output = user_prompt(image_path, user_prompt_text)
+    
+    return output
 
 if __name__ == '__main__':
     app.run(debug=True)
