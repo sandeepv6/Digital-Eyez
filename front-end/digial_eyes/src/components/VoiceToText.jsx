@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from "react";
-import { Mic, MicOff, Trash2, StopCircle } from "lucide-react";
+import { Mic, MicOff, Trash2, StopCircle, Send } from "lucide-react";
+
+const BACKEND_URL = "http://127.0.0.1:5000"; // Ensure your Flask backend is running here
 
 const VoiceToText = () => {
   const [isListening, setIsListening] = useState(false);
@@ -59,6 +61,26 @@ const VoiceToText = () => {
     setTranscript("");
   };
 
+  const sendTranscript = async () => {
+        if (transcript !== "") {
+          try {
+            const response = await fetch(`${BACKEND_URL}/submit_prompt`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ prompt_text: transcript }) // Send the text in JSON format
+            });
+
+            const data = await response.json();
+            setResponseMessage(data.message); // Set response from backend
+        } catch (error) {
+            console.error('Error submitting prompt:', error);
+        }
+        }
+
+  }
+
   return (
     <div className="flex flex-col items-center gap-4 p-4">
       <div className="flex gap-4">
@@ -84,6 +106,15 @@ const VoiceToText = () => {
         >
           <Trash2 size={24} />
         </button>
+        
+        <button
+          onClick={sendTranscript}
+          className="cursor-pointer p-2 bg-gray-500 text-white rounded-full"
+        >
+          <Send size={24} />
+        </button>
+
+
       </div>
 
       <h2 className="text-lg font-semibold p-2 border border-gray-300 rounded-md min-h-[40px] w-full text-center">
