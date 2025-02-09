@@ -4,9 +4,8 @@ from flask_cors import CORS
 import base64
 from io import BytesIO
 from PIL import Image
-from llava_model.py import load_llava_model
-from llava_model.py import user_prompt
-from llava_model.py import safety_prompt
+from utils.gpt_api import call_gpt as user_prompt
+from utils.gpt_api import call_gpt_safety as safety_prompt
 
 app = Flask(__name__)
 CORS(app)
@@ -69,12 +68,10 @@ def process_prompt():
 
 def query_llm(user_prompt):
     image_path = "received_image.jpg"
-    model, processor = load_llava_model()
     if user_prompt == "":
-        output = safety_prompt(image, model, processor);
-        break
+       return safety_prompt(image_path)
     user_prompt_text = user_prompt
-    output = user_prompt(image_path, user_prompt_text, model, processor)
+    output = user_prompt(image_path, user_prompt_text)
     
     return output
 

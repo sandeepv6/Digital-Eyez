@@ -35,7 +35,7 @@ def call_gpt(image_path, prompt):
     print(response.choices[0].message.content)
     return response.choices[0].message.content
 
-def call_gpt(image_path):
+def call_gpt_safety(image_path):
     image_base64 = encode_image(image_path)
 
     safety_prompt = """
