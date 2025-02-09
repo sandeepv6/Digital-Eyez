@@ -16,7 +16,7 @@ const VoiceToText = () => {
 
     // Create a single SpeechRecognition instance
     const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    recognition.continuous = true; // Keep listening until manually stopped
+    recognition.continuous = false; // Keep listening until manually stopped
     recognition.lang = "en-US";
     recognition.interimResults = false;
 
@@ -91,13 +91,6 @@ const VoiceToText = () => {
           }`}
         >
           {isListening ? <MicOff size={24} /> : <Mic size={24} />}
-        </button>
-
-        <button
-          onClick={stopRecording}
-          className="cursor-pointer p-2 bg-yellow-500 text-white rounded-full"
-        >
-          <StopCircle size={24} />
         </button>
 
         <button
