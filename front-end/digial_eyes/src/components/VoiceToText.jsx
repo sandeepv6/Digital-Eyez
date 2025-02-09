@@ -16,7 +16,7 @@ const VoiceToText = () => {
 
     // Create a single SpeechRecognition instance
     const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    recognition.continuous = true; // Keep listening until manually stopped
+    recognition.continuous = false; // Keep listening until manually stopped
     recognition.lang = "en-US";
     recognition.interimResults = false;
 
