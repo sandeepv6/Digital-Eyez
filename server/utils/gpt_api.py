@@ -63,8 +63,3 @@ def call_gpt_safety(image_path):
 
     print(response.choices[0].message.content)
     return response.choices[0].message.content
-
-
-
-# Run example
-call_gpt("../../2.jpg", "Describe the picture")

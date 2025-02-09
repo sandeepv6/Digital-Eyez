@@ -54,23 +54,18 @@ def process_prompt():
     
     file_path = "received_image.jpg"
 
-    # Check if the file exists
-    if os.path.exists(file_path):
-        query_llm(response_message)
-    else:
-        print("Image file was not saved.")
-    
+    query_llm(response_message)
     
     print(response_message)
 
     return jsonify({"message": "Recieved prompt"})
 
 
-def query_llm(user_prompt):
+def query_llm(queries):
     image_path = "received_image.jpg"
     if user_prompt == "":
        return safety_prompt(image_path)
-    user_prompt_text = user_prompt
+    user_prompt_text = queries
     output = user_prompt(image_path, user_prompt_text)
     
     return output
