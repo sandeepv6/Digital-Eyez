@@ -94,13 +94,6 @@ const VoiceToText = () => {
         </button>
 
         <button
-          onClick={stopRecording}
-          className="cursor-pointer p-2 bg-yellow-500 text-white rounded-full"
-        >
-          <StopCircle size={24} />
-        </button>
-
-        <button
           onClick={resetTranscript}
           className="cursor-pointer p-2 bg-gray-500 text-white rounded-full"
         >
