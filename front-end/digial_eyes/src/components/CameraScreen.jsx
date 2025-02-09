@@ -34,7 +34,6 @@ function CameraScreen() {
       .then((data) => {
         speakText(data.AI_Response);
         setAiResponse(data.AI_Response);
-        console.log(data.AI_Response); // Update AI response with new data
         setPrediction(data.result);
         
       })
@@ -43,6 +42,27 @@ function CameraScreen() {
         setPrediction("Error processing image");
       });
   };
+
+
+  // New function to send text prompt to the backend
+  const sendTextToBackend = (text) => {
+    fetch(`${BACKEND_URL}/submit_prompt`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ prompt_text: text }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        speakText(data.AI_Response);
+        setAiResponse(data.AI_Response);
+      })
+      .catch((error) => {
+        console.error("Error sending prompt:", error);
+      });
+  };
+
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-br from-gray-900 to-gray-700">
