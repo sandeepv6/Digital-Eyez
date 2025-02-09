@@ -36,13 +36,11 @@ def process_image():
 
         # Check if the file exists
         if os.path.exists(file_path):
-            query_llm("")
+            response = query_llm("")
         else:
             print("Image file was not saved.")
         
-        result = "Image processed successfully!"
-
-        return jsonify({"result": result})
+        return jsonify({"AI_Response": response})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
@@ -52,13 +50,11 @@ def process_prompt():
     prompt_text = data.get('prompt_text', '')
     response_message = f"Recieved: {prompt_text}"
     
-    file_path = "received_image.jpg"
-
-    query_llm(response_message)
+    response = query_llm(response_message)
     
     print(response_message)
 
-    return jsonify({"message": "Recieved prompt"})
+    return jsonify({"AI_Response": response})
 
 
 def query_llm(queries):

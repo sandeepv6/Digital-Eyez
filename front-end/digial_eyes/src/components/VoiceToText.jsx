@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Mic, MicOff, Trash2, StopCircle, Send } from "lucide-react";
+import { speakText } from "./TextToSpeech";
+
 
 const BACKEND_URL = "http://127.0.0.1:5000"; // Ensure your Flask backend is running here
 
@@ -73,7 +75,10 @@ const VoiceToText = () => {
             });
 
             const data = await response.json();
-            setResponseMessage(data.message); // Set response from backend
+
+            speakText(data.AI_Response)
+
+           // console.log(data.AI_Response); // Set response from backend
         } catch (error) {
             console.error('Error submitting prompt:', error);
         }
