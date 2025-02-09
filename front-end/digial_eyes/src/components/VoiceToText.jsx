@@ -1,42 +1,93 @@
-import React, { useState } from "react";
-import { Mic, MicOff, Trash2 } from "lucide-react";
-import { useVoiceToText } from "react-speakup";
+import { useState, useEffect, useRef } from "react";
+import { Mic, MicOff, Trash2, StopCircle } from "lucide-react";
 
 const VoiceToText = () => {
-  const { startListening, stopListening, transcript, reset } = useVoiceToText({
-    continuous: false,
-    lang: "en-US",
-  });
+  const [isListening, setIsListening] = useState(false);
+  const [transcript, setTranscript] = useState("");
+  const recognitionRef = useRef(null);
 
-  const [userTranscript, setUserTranscript] = useState("");
+  useEffect(() => {
+    if (!("webkitSpeechRecognition" in window || "SpeechRecognition" in window)) {
+      console.error("Speech recognition not supported in this browser.");
+      return;
+    }
 
-  // Start recording
-  const handleStart = () => {
-    setUserTranscript(""); // Reset previous transcript
-    startListening();
+    // Create a single SpeechRecognition instance
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.continuous = true; // Keep listening until manually stopped
+    recognition.lang = "en-US";
+    recognition.interimResults = false;
+
+    recognition.onstart = () => {
+      setIsListening(true);
+    };
+
+    recognition.onend = () => {
+      setIsListening(false);
+    };
+
+    recognition.onresult = (event) => {
+      const text = event.results[event.results.length - 1][0].transcript;
+      setTranscript((prevTranscript) => prevTranscript + " " + text); // Append new speech
+    };
+
+    recognition.onerror = (event) => {
+      console.error("Speech recognition error:", event.error);
+      setIsListening(false);
+    };
+
+    // Store recognition instance in ref
+    recognitionRef.current = recognition;
+  }, []);
+
+  const startRecording = () => {
+    if (!recognitionRef.current) return;
+
+    if (!isListening) {
+      setTranscript(""); // Clear previous transcript
+      recognitionRef.current.start(); // Start recognition only if not already listening
+    }
   };
 
-  // Stop recording and update transcript
-  const handleStop = () => {
-    stopListening();
-    setUserTranscript(transcript); // Update state with final transcript
-    reset();
+  const stopRecording = () => {
+    if (recognitionRef.current && isListening) {
+      recognitionRef.current.stop(); // Stop recognition properly
+    }
   };
 
-  // Reset the transcript manually
-  const handleReset = () => {
-    setUserTranscript("");
+  const resetTranscript = () => {
+    setTranscript("");
   };
 
   return (
     <div className="flex flex-col items-center gap-4 p-4">
       <div className="flex gap-4">
-        <Mic onClick={handleStart} role="button" className="cursor-pointer text-green-500" />
-        <MicOff onClick={handleStop} role="button" className="cursor-pointer text-red-500" />
-        <Trash2 onClick={handleReset} role="button" className="cursor-pointer text-gray-500" />
+        <button
+          onClick={startRecording}
+          className={`cursor-pointer p-2 rounded-full ${
+            isListening ? "bg-red-500 text-white" : "bg-green-500 text-white"
+          }`}
+        >
+          {isListening ? <MicOff size={24} /> : <Mic size={24} />}
+        </button>
+
+        <button
+          onClick={stopRecording}
+          className="cursor-pointer p-2 bg-yellow-500 text-white rounded-full"
+        >
+          <StopCircle size={24} />
+        </button>
+
+        <button
+          onClick={resetTranscript}
+          className="cursor-pointer p-2 bg-gray-500 text-white rounded-full"
+        >
+          <Trash2 size={24} />
+        </button>
       </div>
+
       <h2 className="text-lg font-semibold p-2 border border-gray-300 rounded-md min-h-[40px] w-full text-center">
-        {userTranscript || "Press the mic to start recording..."}
+        {isListening ? "Listening..." : transcript || "Press the mic to start recording..."}
       </h2>
     </div>
   );
