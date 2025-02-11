@@ -9,7 +9,7 @@
 
 - 📷 **Object Recognition** – Identifies objects in the user's environment.
 - 🔍 **Text Reading (OCR)** – Reads out text from images using Optical Character Recognition (OCR).
-- 🛑 **Obstacle Detection** – Helps users navigate safely by detecting obstacles.
+- 🛑 **Hazard Detection** – Helps users navigate safely by detecting obstacles.
 - 🗣️ **Voice Feedback** – Provides auditory descriptions of detected objects and text.
 - 🌐 **Web-Based Interface** – Accessible via any web browser.
 
